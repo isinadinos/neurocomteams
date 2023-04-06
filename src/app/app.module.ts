@@ -10,12 +10,14 @@ import { MsalInterceptor, MsalModule } from "@azure/msal-angular";
 import { BrowserCacheLocation, InteractionType, PublicClientApplication } from "@azure/msal-browser";
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { environment } from '../environments/environment';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +29,7 @@ import { environment } from '../environments/environment';
         authority: `https://login.microsoftonline.com/${environment.tenantId}`,
         // redirectUri: 'https://myuniquedomain.loca.lt/auth',
         // redirectUri: '/home',
-        redirectUri: 'https://white-plant-0e2d2ed10.3.azurestaticapps.net/auth'
+        redirectUri: 'https://white-plant-0e2d2ed10.3.azurestaticapps.net'
       },
       cache: {
         cacheLocation: BrowserCacheLocation.LocalStorage,

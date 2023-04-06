@@ -4,11 +4,13 @@ import { MsalRedirectComponent } from '@azure/msal-angular';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { TeamsGuard } from './teams.guard';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [TeamsGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'auth', component: MsalRedirectComponent }
+  { path: 'auth', component: MsalRedirectComponent },
+  { path: 'profile', component: ProfileComponent }
 ];
 
 @NgModule({

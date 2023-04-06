@@ -66,7 +66,9 @@ export class TeamsGuard implements CanActivate {
               }
 
               this.authService.redirectUrl = state.url;
-              return of(this.router.parseUrl('/login'));
+              //return of(this.router.parseUrl('/login'));
+              this.router.navigate(['/login']);
+              return of(false);
             }),
             //first()
           ))
