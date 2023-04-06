@@ -26,7 +26,8 @@ import { environment } from '../environments/environment';
         clientId: environment.aadAppId,
         authority: `https://login.microsoftonline.com/${environment.tenantId}`,
         // redirectUri: 'https://myuniquedomain.loca.lt/auth',
-        redirectUri: 'https://www.neurocom.eu/neurocomteamsapp',
+        // redirectUri: '/home',
+        redirectUri: 'https://white-plant-0e2d2ed10.3.azurestaticapps.net/#/auth'
       },
       cache: {
         cacheLocation: BrowserCacheLocation.LocalStorage,

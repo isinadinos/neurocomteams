@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
   }
 
   login() {
@@ -26,4 +27,5 @@ export class LoginComponent implements OnInit {
       ...authRequest
     } as RedirectRequest);
   }
+
 }
