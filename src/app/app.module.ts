@@ -27,7 +27,7 @@ import { environment } from '../environments/environment';
         authority: `https://login.microsoftonline.com/${environment.tenantId}`,
         // redirectUri: 'https://myuniquedomain.loca.lt/auth',
         // redirectUri: '/home',
-        redirectUri: 'https://white-plant-0e2d2ed10.3.azurestaticapps.net'
+        redirectUri: 'https://white-plant-0e2d2ed10.3.azurestaticapps.net/auth'
       },
       cache: {
         cacheLocation: BrowserCacheLocation.LocalStorage,
