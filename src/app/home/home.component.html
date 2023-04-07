@@ -1,1 +1,29 @@
 <p>home works!</p>
+
+<div *ngIf="isLoggedIn()">
+YOU ARE LOGGED IN AS {{ getName() }}
+</div>
+
+<div *ngIf="!isLoggedIn()">
+YOU ARE NOT LOGGED IN
+</div>
+
+<br>
+
+<!-- <div *ngIf="isLoggedIn()"> -->
+<button (click)="callProfile()">GET PROFILE</button>
+<div>Api Response: {{apiResponse}}</div>
+<!-- </div> -->
+
+<!--
+<br><br>
+
+<button (click)="login()">LOGIN</button>
+
+<button (click)="logout()">LOGOUT</button>
+ -->
+
+ <div>
+    <button (click)="getAccessTokenAndCallGraphAPI()">GET GROUPS</button>
+    <pre>Groups Response: {{ groups }} </pre>
+</div>

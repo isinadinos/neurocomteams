@@ -57,7 +57,7 @@ export class TeamsGuard implements CanActivate {
 
         this.msalGuard.canActivate(route, state);
 
-        return firstValueFrom(this.msalBroadcastService.inProgress$
+        return lastValueFrom(this.msalBroadcastService.inProgress$
           .pipe(
             filter((status: InteractionStatus) => status === InteractionStatus.None),
             switchMap(() => {

@@ -6,18 +6,27 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 
-import { MsalInterceptor, MsalModule } from "@azure/msal-angular";
+import { MsalInterceptor, MsalInterceptorConfiguration, MsalModule, MSAL_INSTANCE, MSAL_INTERCEPTOR_CONFIG } from "@azure/msal-angular";
 import { BrowserCacheLocation, InteractionType, PublicClientApplication } from "@azure/msal-browser";
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { environment } from '../environments/environment';
-import { ProfileComponent } from './profile/profile.component';
+
+export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
+  const protectedResourceMap = new Map<string, Array<string>>();
+  protectedResourceMap.set('https://graph.microsoft.com/v1.0/me', ['user.read']);
+  protectedResourceMap.set('https://graph.microsoft.com/v1.0/groups', ['group.Read.All']);
+
+  return {
+    interactionType: InteractionType.Popup,
+    protectedResourceMap
+  };
+}
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent,
-    ProfileComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +38,7 @@ import { ProfileComponent } from './profile/profile.component';
         authority: `https://login.microsoftonline.com/${environment.tenantId}`,
         // redirectUri: 'https://myuniquedomain.loca.lt/auth',
         // redirectUri: '/home',
-        redirectUri: 'https://white-plant-0e2d2ed10.3.azurestaticapps.net'
+        redirectUri: 'http://localhost:4200/'
       },
       cache: {
         cacheLocation: BrowserCacheLocation.LocalStorage,
@@ -40,7 +49,8 @@ import { ProfileComponent } from './profile/profile.component';
     }, {
       interactionType: InteractionType.Redirect,
       protectedResourceMap: new Map([
-        ['https://myuniquedomain-api.loca.lt', ['access_as_user']]
+        //['https://myuniquedomain-api.loca.lt', ['access_as_user']]
+        ['https://localhost:4200', ['access_as_user']]
       ])
     })
   ],
@@ -49,7 +59,11 @@ import { ProfileComponent } from './profile/profile.component';
       provide: HTTP_INTERCEPTORS,
       useClass: MsalInterceptor,
       multi: true
-    }
+    },
+    {
+      provide: MSAL_INTERCEPTOR_CONFIG,
+      useFactory: MSALInterceptorConfigFactory
+    },
   ],
   bootstrap: [AppComponent]
 })
