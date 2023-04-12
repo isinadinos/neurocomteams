@@ -1,5 +1,3 @@
-<p>home works!</p>
-
 <div *ngIf="isLoggedIn()">
 YOU ARE LOGGED IN AS {{ getName() }}
 </div>
@@ -9,21 +7,31 @@ YOU ARE NOT LOGGED IN
 </div>
 
 <br>
+<br>
 
-<!-- <div *ngIf="isLoggedIn()"> -->
-<button (click)="callProfile()">GET PROFILE</button>
-<div>Api Response: {{apiResponse}}</div>
-<!-- </div> -->
 
-<!--
-<br><br>
-
-<button (click)="login()">LOGIN</button>
-
-<button (click)="logout()">LOGOUT</button>
- -->
-
- <div>
-    <button (click)="getAccessTokenAndCallGraphAPI()">GET GROUPS</button>
-    <pre>Groups Response: {{ groups }} </pre>
-</div>
+<fluent-tabs activeid="entrees">
+    <fluent-tab id="apps">Profile</fluent-tab>
+    <fluent-tab id="groups">Groups</fluent-tab>
+    <fluent-tab id="members">Members</fluent-tab>
+    <fluent-tab-panel id="appsPanel">
+        <fluent-button (click)="callProfile()" appearance=”accent”  style="margin-top:25px;">
+            GET PROFILE
+        </fluent-button>
+        <div *ngIf="apiResponse" style="margin-top:25px; padding: 25px; background-color: #f1f1f1;">
+            {{apiResponse}}
+        </div>
+    </fluent-tab-panel>
+    <fluent-tab-panel id="groupsPanel">
+        <fluent-button (click)="getAccessTokenAndCallGraphAPI()" appearance=”accent” style="margin-top:25px;">
+            GET GROUPS
+        </fluent-button>
+        <div *ngIf="groups" style="margin-top:25px; padding: 25px; background-color: #f1f1f1;">{{groups}}</div>
+    </fluent-tab-panel>
+    <fluent-tab-panel id="membersPanel">
+        <fluent-button (click)="callProfile()" appearance=”accent”  style="margin-top:25px;">
+            GET PROFILE
+        </fluent-button>
+        <div *ngIf="apiResponse" style="margin-top:25px; padding: 25px; background-color: #f1f1f1;">{{apiResponse}}</div>
+    </fluent-tab-panel>
+</fluent-tabs>

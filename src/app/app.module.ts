@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -50,7 +50,8 @@ export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
       interactionType: InteractionType.Redirect,
       protectedResourceMap: new Map([
         //['https://myuniquedomain-api.loca.lt', ['access_as_user']]
-        ['https://localhost:4200', ['access_as_user']]
+        ['https://localhost:4200', ['access_as_user']],
+        ['https://white-plant-0e2d2ed10.3.azurestaticapps.net',['access_as_user']]
       ])
     })
   ],
@@ -65,6 +66,7 @@ export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
       useFactory: MSALInterceptorConfigFactory
     },
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

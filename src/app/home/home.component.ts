@@ -2,6 +2,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
 import { AuthenticationResult } from '@azure/msal-browser';
+import { TeamsService } from '../teams.service';
+import {
+  provideFluentDesignSystem,
+  fluentTab,
+  fluentTabPanel,
+  fluentTabs,
+  fluentButton,
+  fluentTextArea
+} from "@fluentui/web-components";
+
+provideFluentDesignSystem().register(fluentTab(), fluentTabPanel(), fluentTabs(), fluentButton(), fluentTextArea());
 
 @Component({
   selector: 'app-home',
@@ -16,11 +27,16 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private msalService: MsalService,
-    private http: HttpClient
-    ) { }
+    private http: HttpClient,
+    private teamsService: TeamsService
+    ) {
+
+    }
 
   ngOnInit(): void {
-    this.msalService.instance.setActiveAccount(this.msalService.instance.getAllAccounts()[0]);
+    if(this.msalService.instance.getAllAccounts.length == 0){
+      this.msalService.instance.setActiveAccount(this.msalService.instance.getAllAccounts()[0]);
+    }
     //this.getAccessTokenAndCallGraphAPI();
     // this.msalService.instance.handleRedirectPromise().then( res => {
     //   if (res != null && res.account != null) {
