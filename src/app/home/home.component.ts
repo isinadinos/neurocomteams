@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
 import { AuthenticationResult } from '@azure/msal-browser';
 import { TeamsService } from '../teams.service';
@@ -9,10 +9,17 @@ import {
   fluentTabPanel,
   fluentTabs,
   fluentButton,
-  fluentTextArea
+  fluentTextArea,
+  fluentDataGridCell,
+  fluentDataGridRow,
+  fluentDataGrid,
+  DataGrid,
+  fluentCard
 } from "@fluentui/web-components";
 
-provideFluentDesignSystem().register(fluentTab(), fluentTabPanel(), fluentTabs(), fluentButton(), fluentTextArea());
+provideFluentDesignSystem().register(fluentTab(), fluentTabPanel(), fluentTabs(), fluentButton(), fluentTextArea(),
+  fluentDataGridCell(),fluentDataGridRow(),fluentDataGrid(), fluentCard()
+);
 
 @Component({
   selector: 'app-home',
@@ -21,9 +28,11 @@ provideFluentDesignSystem().register(fluentTab(), fluentTabPanel(), fluentTabs()
 })
 export class HomeComponent implements OnInit {
 
-  apiResponse: string | undefined;
+  apiResponse: any;
   name = '';
   groups: any;
+
+  defaultGridElement: DataGrid | null = null;
 
   constructor(
     private msalService: MsalService,
@@ -37,12 +46,6 @@ export class HomeComponent implements OnInit {
     if(this.msalService.instance.getAllAccounts.length == 0){
       this.msalService.instance.setActiveAccount(this.msalService.instance.getAllAccounts()[0]);
     }
-    //this.getAccessTokenAndCallGraphAPI();
-    // this.msalService.instance.handleRedirectPromise().then( res => {
-    //   if (res != null && res.account != null) {
-    //     this.msalService.instance.setActiveAccount(res.account)
-    //   }
-    // })
   }
 
   isLoggedIn(): boolean {
@@ -51,26 +54,36 @@ export class HomeComponent implements OnInit {
 
   callProfile () {
     this.http.get("https://graph.microsoft.com/v1.0/me").subscribe( resp  => {
-      this.apiResponse = JSON.stringify(resp)
+      // this.apiResponse = JSON.stringify(resp);
+      this.apiResponse = resp;
     })
   }
 
   getAccessTokenAndCallGraphAPI(){
-
-    // this.msalService.acquireTokenSilent({
-    //   scopes: ['group.Read.All']
-    // }).subscribe( (result : any |undefined) => {
-    //   const httpOptions = {
-    //     headers: new HttpHeaders({
-    //       'Content-Type':  'application/json',
-    //       Authorization: 'Bearer '+result.accessToken
-    //     })}
-
       this.http.get("https://graph.microsoft.com/v1.0/groups?$select=id,displayName").subscribe( result => {
         console.log(result);
-        this.groups = JSON.stringify(result);
+        this.groups = result;
+        this.defaultGridElement = document.getElementById('defaultGrid') as DataGrid;
+        this.defaultGridElement.rowsData = this.newDataSet(this.groups.value.length, this.groups.value);
       });
-    // })
+  }
+
+ newDataSet(rowCount: number, data: groupsData[]): object[] {
+    const newRows: object[] = [];
+    for (let i = 0; i <= rowCount; i++) {
+      if (data[i] && data[i].id != undefined && data[i].id != null){
+        newRows.push(this.newDataRow(`${i + 1}`, data[i]));
+      }
+    }
+    return newRows;
+  }
+
+ newDataRow(id: string, data: groupsData): object {
+    return {
+      index: `${id}`,
+      id: data?.id,
+      name: data?.displayName,
+    };
   }
 
   getName () : string | undefined{
@@ -92,6 +105,9 @@ export class HomeComponent implements OnInit {
       });
   }
 
+}
 
-
+export interface groupsData {
+  id: string,
+  displayName: string
 }
