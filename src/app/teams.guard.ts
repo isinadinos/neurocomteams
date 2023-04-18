@@ -51,7 +51,7 @@ export class TeamsGuard implements CanActivate {
                 resolve(this.router.parseUrl('/login'));
               },
               // resources: ['https://myuniquedomain.loca.lt']
-              resources: ['http://localhost:4200', 'https://white-plant-0e2d2ed10.3.azurestaticapps.net']
+              resources: ['https://white-plant-0e2d2ed10.3.azurestaticapps.net']
             });
           });
         }
