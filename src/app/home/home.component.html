@@ -39,7 +39,7 @@ YOU ARE NOT LOGGED IN
         <fluent-button (click)="getAccessTokenAndCallGraphAPI()" appearance=”accent” style="margin-top:25px;">
             GET GROUPS
         </fluent-button>
-        <div *ngIf="groups" style="margin-top:25px; padding: 25px; background-color: #f1f1f1; border-radius: 4px;">
+        <div style="margin-top:25px; padding: 25px;">
             <!-- {{groups | json}} -->
             <fluent-data-grid id="defaultGrid" style="max-height: 30em; overflow-y: auto;">
             </fluent-data-grid>
