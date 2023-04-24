@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, } from '@angular/core';
-import { MsalService } from '@azure/msal-angular';
-import { AuthenticationResult } from '@azure/msal-browser';
+import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
+import { AuthenticationResult, EventMessage, EventType } from '@azure/msal-browser';
 import { TeamsService } from '../teams.service';
 import {
   provideFluentDesignSystem,
@@ -16,6 +16,7 @@ import {
   DataGrid,
   fluentCard
 } from "@fluentui/web-components";
+import { filter } from 'rxjs';
 
 provideFluentDesignSystem().register(fluentTab(), fluentTabPanel(), fluentTabs(), fluentButton(), fluentTextArea(),
   fluentDataGridCell(),fluentDataGridRow(),fluentDataGrid(), fluentCard()
@@ -37,10 +38,28 @@ export class HomeComponent implements OnInit {
   constructor(
     private msalService: MsalService,
     private http: HttpClient,
-    private teamsService: TeamsService
+    private teamsService: TeamsService,
+    private msalBroadcastService: MsalBroadcastService
     ) {
 
-    }
+  }
+
+  // ngOnInit(): void {
+  //   this.msalBroadcastService.msalSubject$
+  //     .pipe(
+  //       filter((msg: EventMessage) => msg.eventType === EventType.LOGIN_SUCCESS),
+  //     )
+  //     .subscribe((result: EventMessage) => {
+  //       const payload = result.payload as AuthenticationResult;
+  //       this.msalService.instance.setActiveAccount(payload.account);
+  //       this.setLoginDisplay();
+  //     });
+  //     this.setLoginDisplay();
+  // }
+
+  // setLoginDisplay() {
+  //   this.loginDisplay = this.msalService.instance.getAllAccounts().length > 0;
+  // }
 
   ngOnInit(): void {
     if(this.msalService.instance.getAllAccounts.length == 0){
@@ -98,12 +117,14 @@ export class HomeComponent implements OnInit {
     this.msalService.logout()
   }
 
-  login() {
-    this.msalService.loginPopup()
-      .subscribe((response: AuthenticationResult) => {
-        this.msalService.instance.setActiveAccount(response.account);
-      });
-  }
+  // login() {
+  //   this.msalService.loginPopup()
+  //     .subscribe((response: AuthenticationResult) => {
+  //       this.msalService.instance.setActiveAccount(response.account);
+  //     });
+  // }
+
+  // loginDisplay = false;
 
 }
 

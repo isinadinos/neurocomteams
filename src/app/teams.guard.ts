@@ -21,44 +21,43 @@ export class TeamsGuard implements CanActivate {
     private msalGuard: MsalGuard,
     private teamsService: TeamsService) { }
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.msalService.instance.getAllAccounts().length > 0) {
-      return true;
-    }
+    canActivate(
+      route: ActivatedRouteSnapshot,
+      state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+      if (this.msalService.instance.getAllAccounts().length > 0) {
+        return true;
+      }
 
-    return this.teamsService
-      .inTeams()
-      .then((inTeams): Promise<boolean | UrlTree> => {
-        if (inTeams) {
-          return new Promise<boolean | UrlTree>((resolve) => {
-            microsoftTeams.authentication.getAuthToken({
-              successCallback: (token: string) => {
-                const decodedToken: { [key: string]: any; } = jwtDecode(token) as { [key: string]: any; };
-                this.registerTeamsTokenWithMsal(decodedToken, token);
+      return this.teamsService
+        .inTeams()
+        .then((inTeams): Promise<boolean | UrlTree> => {
+          if (inTeams) {
+            return new Promise<boolean | UrlTree>((resolve) => {
+              microsoftTeams.authentication.getAuthToken({
+                successCallback: (token: string) => {
+                  const decodedToken: { [key: string]: any; } = jwtDecode(token) as { [key: string]: any; };
+                  this.registerTeamsTokenWithMsal(decodedToken, token);
 
-                microsoftTeams.appInitialization.notifySuccess();
-                resolve(true);
-              },
-              failureCallback: (message: string) => {
-                microsoftTeams.appInitialization.notifyFailure({
-                  reason: microsoftTeams.appInitialization.FailedReason.AuthFailed,
-                  message
+                  microsoftTeams.appInitialization.notifySuccess();
+                  resolve(true);
+                },
+                failureCallback: (message: string) => {
+                  microsoftTeams.appInitialization.notifyFailure({
+                    reason: microsoftTeams.appInitialization.FailedReason.AuthFailed,
+                    message
+                  });
+
+                  this.authService.redirectUrl = state.url;
+                  resolve(this.router.parseUrl('/login'));
+                },
+                resources: ['https://white-plant-0e2d2ed10.3.azurestaticapps.net','http://localhost:4200']
                 });
-
-                this.authService.redirectUrl = state.url;
-                resolve(this.router.parseUrl('/login'));
-              },
-              // resources: ['https://myuniquedomain.loca.lt']
-              resources: ['https://white-plant-0e2d2ed10.3.azurestaticapps.net']
             });
-          });
-        }
+          }
 
         this.msalGuard.canActivate(route, state);
 
-        return lastValueFrom(this.msalBroadcastService.inProgress$
+        return this.msalBroadcastService.inProgress$
           .pipe(
             filter((status: InteractionStatus) => status === InteractionStatus.None),
             switchMap(() => {
@@ -67,13 +66,10 @@ export class TeamsGuard implements CanActivate {
               }
 
               this.authService.redirectUrl = state.url;
-              //return of(this.router.parseUrl('/login'));
-              this.router.navigate(['/login']);
-              return of(false);
+              return of(this.router.parseUrl('/login'));
             }),
-            //first()
-          ))
-          //).toPromise();
+            first()
+          ).toPromise();
       });
   }
 
