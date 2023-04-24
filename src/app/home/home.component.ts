@@ -44,22 +44,6 @@ export class HomeComponent implements OnInit {
 
   }
 
-  // ngOnInit(): void {
-  //   this.msalBroadcastService.msalSubject$
-  //     .pipe(
-  //       filter((msg: EventMessage) => msg.eventType === EventType.LOGIN_SUCCESS),
-  //     )
-  //     .subscribe((result: EventMessage) => {
-  //       const payload = result.payload as AuthenticationResult;
-  //       this.msalService.instance.setActiveAccount(payload.account);
-  //       this.setLoginDisplay();
-  //     });
-  //     this.setLoginDisplay();
-  // }
-
-  // setLoginDisplay() {
-  //   this.loginDisplay = this.msalService.instance.getAllAccounts().length > 0;
-  // }
 
   ngOnInit(): void {
     if(this.msalService.instance.getAllAccounts.length == 0){
@@ -72,8 +56,9 @@ export class HomeComponent implements OnInit {
   }
 
   callProfile () {
+    console.log("Calling profile...");
     this.http.get("https://graph.microsoft.com/v1.0/me").subscribe( resp  => {
-      // this.apiResponse = JSON.stringify(resp);
+      console.log("Calling profile... got response");
       this.apiResponse = resp;
     })
   }
@@ -116,16 +101,6 @@ export class HomeComponent implements OnInit {
   logout() {
     this.msalService.logout()
   }
-
-  // login() {
-  //   this.msalService.loginPopup()
-  //     .subscribe((response: AuthenticationResult) => {
-  //       this.msalService.instance.setActiveAccount(response.account);
-  //     });
-  // }
-
-  // loginDisplay = false;
-
 }
 
 export interface groupsData {
