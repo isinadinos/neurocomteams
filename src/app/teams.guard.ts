@@ -38,7 +38,7 @@ export class TeamsGuard implements CanActivate {
                 successCallback: (token: string) => {
                   const decodedToken: { [key: string]: any; } = jwtDecode(token) as { [key: string]: any; };
                   this.registerTeamsTokenWithMsal(decodedToken, token);
-
+                  console.log("notifySuccess");
                   microsoftTeams.appInitialization.notifySuccess();
                   resolve(true);
                 },
@@ -47,7 +47,7 @@ export class TeamsGuard implements CanActivate {
                     reason: microsoftTeams.appInitialization.FailedReason.AuthFailed,
                     message
                   });
-
+                  console.log("notifyFailure" + microsoftTeams.appInitialization.FailedReason.AuthFailed);
                   this.authService.redirectUrl = state.url;
                   resolve(this.router.parseUrl('/login'));
                 },
