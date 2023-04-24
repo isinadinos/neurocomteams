@@ -32,6 +32,7 @@ export class TeamsGuard implements CanActivate {
         .inTeams()
         .then((inTeams): Promise<boolean | UrlTree> => {
           if (inTeams) {
+            console.log("inTeams");
             return new Promise<boolean | UrlTree>((resolve) => {
               microsoftTeams.authentication.getAuthToken({
                 successCallback: (token: string) => {
@@ -50,7 +51,7 @@ export class TeamsGuard implements CanActivate {
                   this.authService.redirectUrl = state.url;
                   resolve(this.router.parseUrl('/login'));
                 },
-                resources: ['https://white-plant-0e2d2ed10.3.azurestaticapps.net','http://localhost:4200']
+                resources: ['https://white-plant-0e2d2ed10.3.azurestaticapps.net']
                 });
             });
           }
