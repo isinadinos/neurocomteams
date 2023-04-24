@@ -47,7 +47,8 @@ export class TeamsGuard implements CanActivate {
                     reason: microsoftTeams.appInitialization.FailedReason.AuthFailed,
                     message
                   });
-                  console.log("notifyFailure" + microsoftTeams.appInitialization.FailedReason.AuthFailed);
+                  console.log("notifyFailure: " + microsoftTeams.appInitialization.FailedReason.AuthFailed +
+                              ", message: " + message);
                   this.authService.redirectUrl = state.url;
                   resolve(this.router.parseUrl('/login'));
                 },
