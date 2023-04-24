@@ -37,8 +37,8 @@ export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
         clientId: environment.aadAppId,
         authority: `https://login.microsoftonline.com/${environment.tenantId}`,
         // redirectUri: 'https://myuniquedomain.loca.lt/auth',
-        // redirectUri: '/home',
-        redirectUri: 'http://localhost:4200/'
+        redirectUri: 'https://white-plant-0e2d2ed10.3.azurestaticapps.net'
+        // redirectUri: 'http://localhost:4200/'
       },
       cache: {
         cacheLocation: BrowserCacheLocation.LocalStorage,
