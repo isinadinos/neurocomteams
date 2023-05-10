@@ -1,0 +1,55 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "version": "0.0.1",
+  "manifestVersion": "1.12",
+  "id": "b89563a4-9920-4954-a45f-e052cc8076be",
+  "packageName": "eu.neurocom.teams",
+  "name": {
+    "short": "Neurocom Teams Angular app",
+    "full": ""
+  },
+  "developer": {
+    "name": "i.sinadinos",
+    "mpnId": "",
+    "websiteUrl": "https://white-plant-0e2d2ed10.3.azurestaticapps.net",
+    "privacyUrl": "https://white-plant-0e2d2ed10.3.azurestaticapps.net/privacy",
+    "termsOfUseUrl": "https://white-plant-0e2d2ed10.3.azurestaticapps.net/termsofuse"
+  },
+  "description": {
+    "short": "Neurocom Teams app built with Angular",
+    "full": "NeurocomTeams app built with Angular"
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "dashboardTab",
+      "name": "Neurocom HR",
+      "contentUrl": "https://white-plant-0e2d2ed10.3.azurestaticapps.net",
+      "scopes": [
+        "personal",
+		"team"
+      ]
+    },
+    {
+      "entityId": "about",
+      "scopes": [
+        "personal",
+	    "team"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity"
+  ],
+  "validDomains": [
+	"azurestaticapps.net",
+	"localhost"
+  ],
+  "webApplicationInfo": {
+	"id": "89668e94-df0a-4bd8-a24c-bb7cc7ac8f99"
+  }
+}

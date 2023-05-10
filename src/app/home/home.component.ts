@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, } from '@angular/core';
 import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
-import { AuthenticationResult, EventMessage, EventType } from '@azure/msal-browser';
+import { AuthenticationResult, EventMessage, EventType, InteractionStatus } from '@azure/msal-browser';
 import { TeamsService } from '../teams.service';
 import {
   provideFluentDesignSystem,
@@ -16,7 +16,7 @@ import {
   DataGrid,
   fluentCard
 } from "@fluentui/web-components";
-import { filter } from 'rxjs';
+import { catchError, filter } from 'rxjs';
 
 provideFluentDesignSystem().register(fluentTab(), fluentTabPanel(), fluentTabs(), fluentButton(), fluentTextArea(),
   fluentDataGridCell(),fluentDataGridRow(),fluentDataGrid(), fluentCard()
@@ -46,9 +46,13 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
-    if(this.msalService.instance.getAllAccounts.length == 0){
-      this.msalService.instance.setActiveAccount(this.msalService.instance.getAllAccounts()[0]);
-    }
+    console.log('init home component')
+    console.log(JSON.stringify(this.msalService.instance.getAllAccounts))
+    console.log(JSON.stringify(this.msalService.instance.getActiveAccount))
+    // if(this.msalService.instance.getAllAccounts.length == 0){
+    //   this.msalService.instance.setActiveAccount(this.msalService.instance.getAllAccounts()[0]);
+    // }
+
   }
 
   isLoggedIn(): boolean {
@@ -57,10 +61,17 @@ export class HomeComponent implements OnInit {
 
   callProfile () {
     console.log("Calling profile...");
-    this.http.get("https://graph.microsoft.com/v1.0/me").subscribe( resp  => {
-      console.log("Calling profile... got response");
-      this.apiResponse = resp;
-    })
+    this.http.get("https://graph.microsoft.com/v1.0/me").subscribe(
+      resp  => {
+        console.log("Calling profile... got response");
+        this.apiResponse = resp;
+      },
+      error => {
+        console.error('error caught in component')
+        console.log(error?.message)
+        throw error;
+      }
+    )
   }
 
   getAccessTokenAndCallGraphAPI(){
@@ -86,21 +97,23 @@ export class HomeComponent implements OnInit {
     return {
       index: `${id}`,
       id: data?.id,
-      name: data?.displayName,
+      name: data?.displayName
     };
   }
 
-  getName () : string | undefined{
+  getName() : string | undefined{
     if (this.msalService.instance.getActiveAccount() == null) {
       return 'unknown'
     }
-
-    return this.msalService.instance.getActiveAccount()?.name
+    return this.msalService.instance.getActiveAccount()?.username
   }
 
   logout() {
     this.msalService.logout()
   }
+
+
+
 }
 
 export interface groupsData {
