@@ -1,48 +1,56 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
-  "version": "1.0.0",
-  "manifestVersion": "1.12",
-  "id": "51fb2836-1a45-41db-8dd2-ce0e3ed0e89a",
-  "packageName": "com.package.name",
-  "name": {
-    "short": "Angular Teams app",
-    "full": ""
-  },
-  "developer": {
-    "name": "Contoso",
-    "mpnId": "",
-    "websiteUrl": "https://localhost:4200",
-    "privacyUrl": "https://localhost:4200/privacy",
-    "termsOfUseUrl": "https://localhost:4200/termsofuse"
-  },
-  "description": {
-    "short": "Teams app built with Angular",
-    "full": "Teams app built with Angular"
-  },
-  "icons": {
-    "outline": "outline.png",
-    "color": "color.png"
-  },
-  "accentColor": "#FFFFFF",
-  "staticTabs": [
-    {
-      "entityId": "fe120464-9686-4780-a27b-885f72482a5a",
-      "name": "Angular app",
-      "contentUrl": "https://myuniquedomain.loca.lt",
-      "scopes": [
-        "personal"
-      ]
-    },
-    {
-      "entityId": "about",
-      "scopes": [
-        "personal"
-      ]
-    }
-  ],
-  "validDomains": [],
-  "webApplicationInfo": {
-    "id": "fc51be1e-1870-4300-a6e6-e853c57577b4",
-    "resource": "api://myuniquedomain.loca.lt/fc51be1e-1870-4300-a6e6-e853c57577b4"
-  }
+	"$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+	"version": "0.0.1",
+	"manifestVersion": "1.12",
+	"id": "b89563a4-9920-4954-a45f-e052cc8076be",
+	"packageName": "eu.neurocom.teams",
+	"name": {
+		"short": "Neurocom Teams Angular app",
+		"full": ""
+	},
+	"developer": {
+		"name": "i.sinadinos",
+		"mpnId": "",
+		"websiteUrl": "https://93e6-46-177-11-221.ngrok-free.app",
+		"privacyUrl": "https://93e6-46-177-11-221.ngrok-free.app/privacy",
+		"termsOfUseUrl": "https://93e6-46-177-11-221.ngrok-free.app/termsofuse"
+	},
+	"description": {
+		"short": "Neurocom Teams app built with Angular",
+		"full": "NeurocomTeams app built with Angular"
+	},
+	"icons": {
+		"outline": "outline.png",
+		"color": "color.png"
+	},
+	"accentColor": "#FFFFFF",
+	"staticTabs": [{
+			"entityId": "dashboardTab",
+			"name": "Neurocom HR",
+			"contentUrl": "https://93e6-46-177-11-221.ngrok-free.app",
+			"scopes": [
+				"personal",
+				"team"
+			]
+		},
+		{
+			"entityId": "about",
+			"scopes": [
+				"personal",
+				"team"
+			]
+		}
+	],
+	"permissions": [
+		"identity"
+	],
+	"validDomains": [
+		"azurestaticapps.net",
+		"localhost",
+		"ngrok-free.app"
+	],
+	"webApplicationInfo": {
+		"id": "89668e94-df0a-4bd8-a24c-bb7cc7ac8f99",
+		"resource": "api://93e6-46-177-11-221.ngrok-free.app/89668e94-df0a-4bd8-a24c-bb7cc7ac8f99"
+	}
 }

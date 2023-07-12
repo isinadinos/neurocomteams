@@ -1,18 +1,38 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MsalRedirectComponent } from '@azure/msal-angular';
+import { BrowserUtils } from '@azure/msal-browser';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { TeamsGuard } from './teams.guard';
+import { ProfileComponent } from './profile/profile.component';
+import { MsalGuard } from '@azure/msal-angular';
+
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [TeamsGuard] },
-  { path: 'login', component: LoginComponent },
-  { path: 'auth', component: MsalRedirectComponent },
+  {
+    path: "",
+    children: [
+      {
+        path: "",
+        canActivate: [MsalGuard],
+        canActivateChild: [MsalGuard],
+        children: [
+          { path: "", redirectTo: "home", pathMatch: "full" },
+          { path: "home", component: HomeComponent, pathMatch: "full" },
+        ],
+      },
+    ],
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, {
+      // Don't perform initial navigation in iframes or popups
+      initialNavigation:
+        !BrowserUtils.isInIframe() && !BrowserUtils.isInPopup()
+          ? 'enabledNonBlocking'
+          : 'disabled', // Set to enabledBlocking to use Angular Universal
+    }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
