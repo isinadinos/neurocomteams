@@ -1,0 +1,84 @@
+<div class="parent">
+  <h1 class="mat-h1">Test Message types</h1>
+  <div>
+    <button mat-raised-button class="activeButton" (click)="sendMsg('A success message to be displayed.', 'S')">Success Button</button>&nbsp;
+    <button mat-raised-button class="activeButton" (click)="sendMsg('A warning message to be displayed.', 'W')">Warning Button</button>&nbsp;
+    <button mat-raised-button class="activeButton" (click)="sendMsg('An info message to be displayed.', 'I')">Info Burron</button>&nbsp;
+    <button mat-raised-button class="activeButton" (click)="sendMsg('An error message to be displayed.', 'D')">Error Button</button>&nbsp;
+  </div>
+
+  <br />
+  <h1 class="mat-h1">Notify Spinner</h1>
+  <div>
+    <button mat-raised-button class="activeButton" (click)="spinnerMsg()">Start Remote Spinner</button>&nbsp;
+    <button mat-raised-button class="activeButton" (click)="toggleSpin = !toggleSpin">Start Local Spinner</button>&nbsp;
+    <br />
+  </div>
+  <div *ngIf="!toggleSpin; else loadingInvoice">
+    <p>Local spinner is not loading....</p>
+  </div>
+
+  <ng-template #loadingInvoice style="margin: auto;">
+    <br />
+    <mat-spinner></mat-spinner>
+  </ng-template>
+
+  <br />
+  <div class="form">
+    <dynamic-form [formLabel]="'Other Form Criteria'" [fields]="regConfig" [rowSize]="1" (formEvent)="checkEvent($event)"> </dynamic-form>
+  </div>
+
+  <div [hidden]="!uploadFile">
+    <fieldset class="well" style="height: 250px;">
+      <mat-card>
+        <mat-toolbar>Upload file</mat-toolbar>
+      </mat-card>
+
+      <div name="uploadFileForm">
+        <mat-grid-list cols="3" rowHeight="60px">
+          <mat-grid-tile [colspan]="1" class="flex-label">
+            <label>Upload File</label>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1" class="flex-input">
+            <input type="file" #uploadedFile id="uploadedFile" (change)="handleFileInput($event)" />
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1"></mat-grid-tile>
+          <mat-grid-tile [colspan]="1"></mat-grid-tile>
+          <mat-grid-tile [colspan]="1" class="flex-input">
+            <button mat-raised-button class="activeButton" type="button" (click)="upload()">Υποβολή</button>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </fieldset>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource" class="data-table" matSort (matSortChange)="sortingUpdate($event)">
+    <ng-container [matColumnDef]="'index'">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        [disabled]="!columnValues['index']['sortEn']"
+        [ngStyle]="columnValues['index']['columnStyle']"
+      >
+        {{ columnValues["index"]["name"] }}
+      </th>
+      <td mat-cell *matCellDef="let row; let i = index" [ngStyle]="columnValues['index']['columnStyle']">
+        {{ i }}
+        <!--{{  (this.searchPageInfo?.number && this.searchPageInfo?.size )?( this.searchPageInfo.size * this.searchPageInfo.number + i + 1) : (i + 1) }}-->
+      </td>
+    </ng-container>
+
+    <ng-container *ngFor="let col of columnIds | slice: 1" [matColumnDef]="col">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="!columnValues[col]['sortEn']" [ngStyle]="columnValues[col]['columnStyle']">
+        {{ columnValues[col]["name"] | i18next }}
+      </th>
+      <td mat-cell *matCellDef="let row" [ngStyle]="columnValues[col]['columnStyle']">{{ row[col] }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnIds"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnIds"></tr>
+  </mat-table>
+
+  <app-pagination [searchPageInfo]="searchPageInfo" (paginationEvent)="paginationUpdate($event)"></app-pagination>
+</div>

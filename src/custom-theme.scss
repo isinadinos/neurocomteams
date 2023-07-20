@@ -1,0 +1,228 @@
+@use '@angular/material' as mat;
+@import "@angular/material/_theming";
+
+// To Generate A Palette:http://mcg.mbitson.com/
+
+$neurocom-theme-primary: (
+  50: #e1e6ea,
+  100: #b4c1ca,
+  200: #8397a7,
+  300: #516d84,
+  400: #2b4e69,
+  500: #062f4f,
+  600: #052a48,
+  700: #04233f,
+  800: #031d36,
+  900: #021226,
+  A100: #6196ff,
+  A200: #2e74ff,
+  A400: #0053fa,
+  A700: #004be0,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #ffffff,
+  ),
+);
+
+$neurocom-theme-accent: (
+  50: #e0f2e9,
+  100: #b3dfc7,
+  200: #80c9a2,
+  300: #4db37c,
+  400: #26a360,
+  500: #009344,
+  600: #008b3e,
+  700: #008035,
+  800: #00762d,
+  900: #00641f,
+  A100: #94ffab,
+  A200: #61ff83,
+  A400: #2eff5b,
+  A700: #14ff47,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$neurocom-theme-warn: (
+  50: #fae6e6,
+  100: #f2c1c1,
+  200: #e99898,
+  300: #e06f6f,
+  400: #d95050,
+  500: #d23131,
+  600: #cd2c2c,
+  700: #c72525,
+  800: #c11f1f,
+  900: #b61313,
+  A100: #ffe6e6,
+  A200: #ffb3b3,
+  A400: #ff8080,
+  A700: #ff6767,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$nova-theme-primary: (
+  50: #e0e0e0,
+  100: #b3b3b3,
+  200: #808080,
+  300: #4d4d4d,
+  400: #262626,
+  500: #000000,
+  600: #000000,
+  700: #000000,
+  800: #000000,
+  900: #000000,
+  A100: #a6a6a6,
+  A200: #8c8c8c,
+  A400: #737373,
+  A700: #666666,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #ffffff,
+    A700: #ffffff,
+  ),
+);
+
+$nova-theme-accent: (
+  50: #e1e7ff,
+  100: #b3c2ff,
+  200: #8099ff,
+  300: #4d70ff,
+  400: #2752ff,
+  500: #0133ff,
+  600: #012eff,
+  700: #0127ff,
+  800: #0120ff,
+  900: #0014ff,
+  A100: #ffffff,
+  A200: #f2f3ff,
+  A400: #bfc2ff,
+  A700: #a6a9ff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$nova-theme-warn: (
+  50: #fae6e6,
+  100: #f2c1c1,
+  200: #e99898,
+  300: #e06f6f,
+  400: #d95050,
+  500: #d23131,
+  600: #cd2c2c,
+  700: #c72525,
+  800: #c11f1f,
+  900: #b61313,
+  A100: #ffe6e6,
+  A200: #ffb3b3,
+  A400: #ff8080,
+  A700: #ff6767,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$my-theme-primary: mat.define-palette($neurocom-theme-primary, 500, 200, 900);
+$my-theme-accent: mat.define-palette($neurocom-theme-accent, 500, A200, 900);
+$my-theme-warn: mat.define-palette($neurocom-theme-warn, 500, 200, 900);
+
+// $light-theme: mat.define-light-theme($my-theme-primary, $my-theme-accent, $my-theme-warn);
+
+$my-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $my-theme-primary,
+      accent: $my-theme-accent,
+      warn: $my-theme-warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+$primary: mat.get-color-from-palette($my-theme-primary);
+$accent: mat.get-color-from-palette($my-theme-accent);
+$warn: mat.get-color-from-palette($my-theme-warn);
+
+span.material-icons:hover {
+  cursor: pointer;
+}

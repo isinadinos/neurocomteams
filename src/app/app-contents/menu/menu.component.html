@@ -1,0 +1,111 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    opened
+    fixedInViewport="false"
+    mode="side"
+    style="width: 230px; min-height: 1000px; z-index: 1100; position: fixed;"
+    class="custom-bg-color"
+  >
+    <div style="font: 500 20px/32px Roboto, 'Helvetica Neue', sans-serif; padding: 0px 16px;">
+      <mat-toolbar color="primary">{{ "project.title" | i18next }}</mat-toolbar>
+    </div>
+    <mat-divider></mat-divider>
+    <div *ngIf="user$ | async">
+
+      <!-- TREE MENU -->
+      <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
+        <!-- This is the tree node template for leaf nodes -->
+        <!-- There is inline padding applied to this node using styles.
+          This padding value depends on the mat-icon-button width. -->
+        <mat-tree-node
+          *matTreeNodeDef="let node"
+          [style.display]="node.permission == null || authorities[node.permission] ? 'flex' : 'none'"
+          matTreeNodeToggle
+          [routerLink]="node.link"
+          class="button-node"
+        >
+          <span class="text-node">
+            <mat-icon *ngIf="node.icon" class="tree-icon">{{ node.icon }}</mat-icon
+            >{{ node.name | i18next }}
+          </span>
+        </mat-tree-node>
+        <!-- This is the tree node template for expandable nodes -->
+        <mat-nested-tree-node
+          *matTreeNodeDef="let node; when: hasChild"
+          [style.display]="node.permission == null || authorities[node.permission] ? 'block' : 'none'"
+        >
+          <div class="mat-tree-node text-node button-node" style="justify-content: space-between;" matTreeNodeToggle>
+            <span class="text-node">
+              <mat-icon *ngIf="node.icon" class="tree-icon">{{ node.icon }}</mat-icon
+              >{{ node.name | i18next }}
+            </span>
+            <button mat-icon-button>
+              <mat-icon>
+                {{ treeControl.isExpanded(node) ? "expand_less" : "expand_more" }}
+              </mat-icon>
+            </button>
+          </div>
+          <!-- There is inline padding applied to this div using styles.
+                This padding value depends on the mat-icon-button width.  -->
+          <div [class.example-tree-invisible]="!treeControl.isExpanded(node)" role="group">
+            <ng-container matTreeNodeOutlet></ng-container>
+          </div>
+        </mat-nested-tree-node>
+      </mat-tree>
+    </div>
+
+    <span style="display: block;">
+      <span style="width: 230px; position: fixed; bottom: 0; text-align: center;">
+        <mat-button-toggle-group [(ngModel)]="language">
+          <mat-button-toggle (change)="changeLanguage()" value="el">ΕΛ</mat-button-toggle>
+          <mat-button-toggle (change)="changeLanguage()" value="en">EN</mat-button-toggle>
+        </mat-button-toggle-group>
+      </span>
+    </span>
+  </mat-sidenav>
+
+  <mat-sidenav-content style="min-height: 1000px;">
+    <mat-progress-bar *ngIf="loading()" mode="indeterminate" color="accent" style="position: fixed; z-index: 10000;"></mat-progress-bar>
+    <mat-toolbar style="justify-content: space-between;">
+      <div style="vertical-align: middle;">
+        <span style="cursor: pointer; padding-right: 6px;" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </span>
+        <span *ngIf="!drawer.opened">{{ "project.title" | i18next }}</span>
+      </div>
+      <span *ngIf="!inTeams">
+      <div *ngIf="user$ | async">
+        <!--mat-icon>account_circle</mat-icon-->
+        <span style="font-size: 12px; vertical-align: middle;">
+          {{ "project.users.loggedIn" | i18next }}:
+          <button mat-button>
+            <p class="custom-label">{{ user.mail }}</p>
+          </button>
+        </span>
+
+        <button mat-button matTooltip="{{ 'project.common.logout' | i18next }}" (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+        </button>
+      </div>
+    </span>
+    </mat-toolbar>
+
+    <router-outlet></router-outlet>
+
+    <br />
+    <span *ngIf="!inTeams">
+    <footer>
+      <mat-card class="logo">
+        <p>
+          Powered by NEUROCOM
+          <small style="float: right;">
+            {{ "project.common.version" | i18next }}:
+            <a style="color: #000000de; text-decoration: none;" href="assets/CHANGELOG.html">{{ getRevisionInfo() }}</a>
+          </small>
+        </p>
+      </mat-card>
+    </footer>
+  </span>
+  </mat-sidenav-content>
+</mat-sidenav-container>
