@@ -57,7 +57,7 @@ export function MSALInstanceFactory(): IPublicClientApplication {
 
 export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
   const protectedResourceMap = new Map<string, Array<string>>();
-  protectedResourceMap.set(GRAPH_ENDPOINT, ['user.read']);
+  protectedResourceMap.set(GRAPH_ENDPOINT, ['user.read', 'Calendars.Read.Shared']);
   protectedResourceMap.set(GRAPH_ENDPOINT_GROUP, ['group.Read.All']);
 
   return {
