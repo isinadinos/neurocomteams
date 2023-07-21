@@ -1,1 +1,263 @@
 /* You can add global styles to this file, and also import other style files */
+
+/*
+* styles.scss containing global/generic styling applied to all components
+*
+*/
+@use '@angular/material' as mat;
+@import "./custom-theme.scss";
+
+@include mat.core();
+@include mat.all-component-themes($my-theme);
+
+.parent {
+  position: relative;
+  margin-left: 30px;
+  margin-right: 30px;
+  // background-color: #fafafa;
+  min-height: 800px;
+  margin-top: 20px;
+}
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.1px;
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+/*---------------------------- FORM DESIGN ---------------------------------------------*/
+.mat-card {
+  box-shadow: none !important;
+}
+
+.well {
+  border: 1px solid transparent;
+  min-height: 20px;
+  // background-color: mat.get-color-from-palette($my-theme-primary, 500);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+fieldset {
+  border: none;
+  margin: 0 0 1.5em 0 !important;
+  border-radius: 4px;
+}
+
+/*------------------------------- TABLE DESIGN -----------------------------------------*/
+.data-table {
+  overflow: auto;
+  margin-bottom: 23px;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+::ng-deep .mat-sort-header-container {
+  display: -webkit-inline-box !important;
+}
+
+th,
+td {
+  width: 500px;
+  text-align: center;
+  vertical-align: middle;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mat-header-cell {
+  font-weight: bold;
+}
+
+.mat-row,
+.mat-header-row {
+  height: auto;
+}
+
+::ng-deep .mat-header-cell .mat-sort-header-container {
+  justify-content: flex-end;
+  display: inline-block;
+}
+
+.mat-cell,
+.mat-header-cell {
+  padding: 10px 40px 10px 0px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/*------------------------- STRIPPED TABLE STYLING -----------------------------------*/
+.mat-row:nth-child(even) {
+  background-color: #f5f5f5;
+}
+
+.mat-row:nth-child(odd) {
+  background-color: #ffffff;
+}
+.mat-row:hover {
+  background-color: #e0e0e0;
+}
+
+.warning:hover {
+  background-color: #f8d095 !important;
+}
+
+.warning {
+  background-color: #ffe0b2 !important;
+}
+
+/*-------------------------------------------------------------------------------------------*/
+.text-primary {
+  color: #428bca; /*fix this*/
+}
+
+.text-primary:hover {
+  color: #3071a9;
+}
+
+.text-warning {
+  color: #ff9800;
+}
+
+.text-warning:hover {
+  color: #d38208;
+}
+
+.text-danger {
+  color: #b94a48;
+}
+
+.text-danger:hover {
+  color: #953b39;
+}
+
+.text-success {
+  color: #468847;
+}
+
+.text-success:hover {
+  color: #356635;
+}
+
+.text-info {
+  color: mat.get-color-from-palette($my-theme-primary);
+}
+
+.text-info:hover {
+  color: mat.get-color-from-palette($my-theme-primary, darker);
+}
+
+/*----------------------------- BUTTONS ----------------------------------------*/
+.mat-raised-button.activeButton {
+  color: mat.get-contrast-color-from-palette($my-theme-accent, 500);
+  background-color: mat.get-color-from-palette($my-theme-accent);
+}
+.mat-raised-button.activeButton:hover {
+  background-color: mat.get-color-from-palette($my-theme-accent, darker);
+}
+
+.small-button {
+  background-color: #f0f0f0;
+  color: #444444;
+  cursor: pointer;
+  margin-right: 20px;
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+  border-color: transparent;
+}
+
+.small-button:hover,
+.small-button:focus,
+.small-button:active,
+.small-button:active:hover {
+  background-color: #f0f0f0c4 !important;
+}
+
+.mat-raised-button.delete-button {
+  background-color: mat.get-color-from-palette($my-theme-warn);
+  color: mat.get-contrast-color-from-palette($my-theme-warn, 500);
+  cursor: pointer;
+  //margin-right: 20px;
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+  border-color: transparent;
+}
+
+.mat-raised-button.delete-button:hover,
+.small-button:focus,
+.small-button:active,
+.small-button:active:hover {
+  background-color: mat.get-color-from-palette($my-theme-warn, darker);
+}
+
+/*-----------------------------DISPLAY MESSAGE DESIGN---------------------------*/
+
+.custom-box {
+  position: fixed;
+  top: 150px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.modal-box {
+  width: 70%;
+  position: fixed;
+  top: 150px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.alert-success {
+  color: #ffffff;
+  background-color: #468847;
+  border-color: #468847;
+}
+
+.alert-info {
+  color: mat.get-contrast-color-from-palette($my-theme-primary, 500);
+  background-color: mat.get-color-from-palette($my-theme-primary);
+  border-color: mat.get-color-from-palette($my-theme-primary);
+}
+
+.alert-danger {
+  color: mat.get-contrast-color-from-palette($my-theme-warn, 500);
+  background-color: mat.get-color-from-palette($my-theme-warn);
+  border-color: mat.get-color-from-palette($my-theme-warn);
+}
+
+.alert-warning {
+  color: #ffffff;
+  background-color: #da9a2b;
+  border-color: #da9a2b;
+}
+
+.loading {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+}
+
+.loading img {
+  content: url("./assets/images/sad-pc.gif");
+  width: 70px;
+  height: 70px;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+}
+
+.mat-icon {
+  vertical-align: text-bottom;
+}

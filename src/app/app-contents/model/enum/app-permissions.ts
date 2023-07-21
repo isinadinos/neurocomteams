@@ -1,0 +1,4 @@
+export enum AppPermissions {
+  ADMIN = "PERMISSION_ADMIN",
+  USER_MANAGEMENT = "PERMISSION_USER_MANAGEMENT",
+}

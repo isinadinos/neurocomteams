@@ -1,0 +1,129 @@
+@use '@angular/material' as mat;
+@import "./../../../custom-theme.scss";
+
+/*------------------------ mat-tree design -------------------------------*/
+
+.mat-divider {
+  border-top-width: 1px;
+  border-color: mat.get-color-from-palette($my-theme-primary, 700);
+}
+
+li {
+  color: whitesmoke;
+  font-size: 15px;
+}
+
+i.fa {
+  padding-right: 5px;
+}
+
+a {
+  color: mat.get-contrast-color-from-palette($my-theme-primary, 500);
+}
+mat-tree-node {
+  color: mat.get-contrast-color-from-palette($my-theme-primary, 500);
+}
+
+.text-node {
+  text-decoration: none;
+  font-size: medium;
+  // width: 100%;
+  font: 500 14px Roboto, "Helvetica Neue", sans-serif;
+  color: mat.get-contrast-color-from-palette($my-theme-primary, 500);
+}
+
+.header-info {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.1px;
+  color: #666666;
+  padding: 15px;
+}
+
+//$primary: map-get($custom-theme, primary);
+.custom-bg-color {
+  background-color: mat.get-color-from-palette($my-theme-primary);
+}
+
+.custom-text-color {
+  color: mat.get-contrast-color-from-palette($my-theme-primary, 500);
+}
+
+.custom-label {
+  color: mat.get-color-from-palette($my-theme-primary);
+  text-decoration: none;
+}
+
+.mat-button-toggle-group {
+  height: 32px;
+  align-items: center;
+  font-size: 12px;
+  border: 0;
+  width: 100%;
+}
+
+.mat-button-toggle {
+  background-color: mat.get-color-from-palette($my-theme-primary);
+  color: mat.get-contrast-color-from-palette($my-theme-primary, 500);
+  width: 50%;
+}
+
+.mat-button-toggle-checked {
+  background-color: mat.get-color-from-palette($my-theme-primary, darker);
+  color: mat.get-contrast-color-from-palette($my-theme-primary, darker);
+}
+
+.button-node {
+  cursor: pointer;
+  padding-left: 10px;
+}
+
+.button-node:hover {
+  background-color: mat.get-color-from-palette($my-theme-primary, 600);
+  transition-duration: 200ms;
+}
+
+.button-node:active {
+  background-color: mat.get-color-from-palette($my-theme-primary, 800);
+  transition-duration: 200ms;
+}
+
+.title-node {
+  padding-left: 10px;
+}
+
+.tree-icon {
+  padding-right: 8px;
+}
+
+.example-tree {
+  background-color: mat.get-color-from-palette($my-theme-primary);
+  color: mat.get-contrast-color-from-palette($my-theme-primary, 500);
+}
+
+.example-tree-invisible {
+  display: none;
+}
+
+.example-tree ul,
+.example-tree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+/*
+ * This padding sets alignment of the nested nodes.
+ */
+.example-tree .mat-nested-tree-node div[role="group"] {
+  padding-left: 25px;
+}
+
+/*
+ * Padding for leaf nodes.
+ * Leaf nodes need to have padding so as to align with other non-leaf nodes
+ * under the same parent.
+ */
+.example-tree div[role="group"] > .mat-tree-node {
+  padding-left: 4px;
+}

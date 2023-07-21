@@ -1,0 +1,88 @@
+plugins {
+	id "com.github.node-gradle.node" version "3.2.1"
+	id "com.diffplug.spotless" version "6.12.0"
+}
+
+version '0.0.1'
+
+repositories {
+	mavenCentral()
+}
+
+node {
+	version = '16.14.0'
+	npmVersion = '8.5.5'
+	download = true
+	workDir = file("${project.buildDir}/node")
+	nodeModulesDir = file("${project.projectDir}")
+}
+
+tasks.register('buildFront', NpxTask)
+buildFront {
+	dependsOn 'npmInstall'
+	dependsOn 'cleanDist'
+//	dependsOn 'clean'
+	dependsOn 'gitRevision'
+	command = 'ng'
+	args = ['build', '--configuration=production']
+}
+
+tasks.register('start', NpxTask)
+start {
+	dependsOn 'npmInstall'
+//	dependsOn 'clean'
+	command = 'npm'
+	args = ['start']
+}
+
+clean {
+	dependsOn 'cleanDist'
+}
+
+tasks.register('cleanDist')
+cleanDist {
+	delete 'dist'
+	delete 'src/git-version.json'
+}
+
+tasks.register('gitRevision', NodeTask)
+gitRevision {
+	dependsOn 'npmInstall'
+	script = file('grab-git-info.js')
+}
+
+
+spotless {
+
+	typescript {
+		target 'src/**/*.ts'
+
+		prettier().config(['parser': 'typescript'])
+	}
+
+	format 'javasript', {
+		target 'src/**/*.js'
+		prettier()
+	}
+
+	format 'css', {
+		target 'src/**/*.scss', 'src/**/*.css'
+		prettier().config(['parser': 'scss'])
+	}
+
+	format 'html', {
+		target 'src/**/*.html'
+		prettier().config(['parser': 'angular', 'printWidth': 150])
+	}
+
+	json {
+		target 'src/**/*.json'
+		targetExclude('src/git-version.json')
+
+		gson()
+			.indentWithSpaces(2)
+//			.sortByKeys()
+			.version('2.10')
+	}
+
+}

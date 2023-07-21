@@ -1,0 +1,164 @@
+{
+  "project": {
+    "title": "Neurocom App",
+    "common": {
+      "id": "Id",
+      "criteria": "Search criteria",
+      "services": "Services",
+      "save": "Save",
+      "submit": "Submit",
+      "search": "Search",
+      "export": "Export",
+      "exportExcel": "Excel export",
+      "exportCsv": "CSV export",
+      "searchResults": "Search results",
+      "accept": "Accept",
+      "notAccept": "Reject",
+      "close": "Close",
+      "deactivate": "Deactivate",
+      "activate": "Activate",
+      "edit": "Edit",
+      "update": "Update",
+      "cancel": "Cancel",
+      "modify": "Modify",
+      "finalize": "Finalize",
+      "info": "Info",
+      "actions": "Actions",
+      "momentFrom": "Date from",
+      "momentTo": "Date to",
+      "timestamp": "Moment",
+      "send": "Send",
+      "upload": "Upload",
+      "reset": "Reset",
+      "period": "Period",
+      "version": "Version",
+      "back": "Back",
+      "login": "Login",
+      "logout": "Logout"
+    },
+    "pagination": {
+      "firstPage": "First page",
+      "lastPage": "Last page",
+      "nextPage": "Next page",
+      "previousPage": "Previous page",
+      "itemsPerPage": "Per page",
+      "totalResults": "Total results: {{startIndex}} - {{endIndex}} from {{total}}",
+      "results": "Results: {{startIndex}} - {{endIndex}}"
+    },
+    "menu": {
+      "home": "Home",
+      "profile": "Profile",
+      "group": "Groups",
+      "userInfo": "User Information",
+      "page1": "Page 1",
+      "page2": "Page 2",
+      "superset": "Superset",
+      "usersSection": "Users Management",
+      "resetPassword": "Reset Password",
+      "subΜenu": "Sub Menu"
+    },
+    "users": {
+      "pageTitle": "Users Management",
+      "title": "Users",
+      "addTitle": "Add User",
+      "viewTitle": "User info",
+      "resetTitle": "Change password",
+      "new": "Create new user",
+      "searchTitle": "User Criteria Form",
+      "loggedIn": "Signed in as",
+      "forgot": "Forgot your password?",
+      "table": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "username": "Username",
+        "role": "Role",
+        "since": "Registration Date",
+        "active": "Active",
+        "lastPasswordChangeMoment": "Last Password Change Moment"
+      },
+      "input": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "username": "Username",
+        "role": "Role",
+        "since": "Registration Date",
+        "active": "Active",
+        "password": "Password",
+        "oldPassword": "Old password",
+        "retrievedPassword": "Retrieved password",
+        "newPassword": "New password",
+        "verifyPassword": "Verify password",
+        "lastPasswordChangeMoment": "Last Password Change Moment"
+      },
+      "search": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "username": "Username",
+        "role": "Role"
+      }
+    },
+    "uploadedFile": {
+      "filename": "File name",
+      "validFrom": "Valid from",
+      "validTo": "Valid to"
+    },
+    "validation": {
+      "phoneNumber": "Please enter a valid phone number, e.g. 2105555555, +302105555555, 00302105555555",
+      "namesPattern": "Must be more than 3 characters long",
+      "required": "Field is required",
+      "number": "Must only contain numbers",
+      "date": "Invalid date",
+      "time": "Invalid time",
+      "notAccepableCharacters": "",
+      "email": "Please enter a valid email address (e.g. user@user.gr)",
+      "fixedPhoneNumber": "Invalid fixed phone number (e.g. 2105555555)"
+    }
+  },
+  "password": {
+    "short": "Password too short",
+    "pattern": "Password must be at least 10 characters log. Must contain alphanumeric characters, at leaset one lowercase, uppercase and one special character (e.g. '#', '$', '&', '@', '!')",
+    "invalid": "Invalid username or password",
+    "matchingPrevious": "The new password cannot be the same as the old one",
+    "expired": "Password expired, you need to reset it",
+    "tochange": "Please reset your password",
+    "notMatch": "Verify password does not match",
+    "email": "The retrieved password has been sent to your email address"
+  },
+  "email": {
+    "invalid": "Unknown email address",
+    "nonaccessible": "Internal error, could not sent email"
+  },
+  "file": {
+    "title": "Files",
+    "id": "Id",
+    "name": "Name",
+    "size": "Size",
+    "since": "Since",
+    "upload": {
+      "type": "Not an accepted file type for '{{label}}'. Valid file types: {{typeMessage}}",
+      "size": "File size too large '{{label}}'. Maximum accepted size : {{size/1024/1024}}MB"
+    }
+  },
+  "error": {
+    "filetype": "Invalid file type",
+    "fileUploadFail": "Internal error, could not upload file",
+    "nodata": "Could not complete, no data found"
+  },
+  "account": {
+    "locked": "Your account has be locked!",
+    "loggedOut": "User disconnected",
+    "passwordInvalid": "Invalid username or password",
+    "passwordChanged": "Password has been updated successfully!"
+  },
+  "superset": {
+    "dashboard": {
+      "new": "Add dashboard",
+      "select-after-add": "Open new tab",
+      "delete": "Delete",
+      "open-external": "Open on Superset"
+    }
+  }
+}

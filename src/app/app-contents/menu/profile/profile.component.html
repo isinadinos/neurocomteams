@@ -1,0 +1,143 @@
+<h1>Profile</h1>
+<br/>
+<mat-card *ngIf="user$ | async; let user">
+    <mat-card-header><mat-card-title>Me</mat-card-title></mat-card-header>
+    <pre>{{user | json}}</pre>
+</mat-card>
+
+<br/>
+
+<mat-card *ngIf="memberOf$ | async; let memberOf">
+    <mat-card-header><mat-card-title>Member Of Groups</mat-card-title></mat-card-header>
+    <mat-table #table [dataSource]="memberOf" class="data-table" matSort (matSortChange)="onSorting($event)" *ngIf="memberOf.length > 0">
+        <ng-container [matColumnDef]="'index'">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="true" style="text-align: left;">{{ "Index" | i18next }}</th>
+          <td mat-cell *matCellDef="let row; let i = index" style="text-align: left;">{{ i }}</td>
+        </ng-container>
+    
+        <ng-container [matColumnDef]="'col1'">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="true" style="text-align: left;">{{ "Id" | i18next }}</th>
+          <td mat-cell *matCellDef="let row" style="text-align: left;">{{ row.id }}</td>
+        </ng-container>
+    
+        <ng-container [matColumnDef]="'col2'">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="true" style="text-align: left;">{{ "Name" | i18next }}</th>
+          <td mat-cell *matCellDef="let row" style="text-align: left;">{{ row.displayName }}</td>
+        </ng-container>
+    
+        <ng-container [matColumnDef]="'col3'">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="true" style="text-align: left;">{{ "Description" | i18next }}</th>
+          <td mat-cell *matCellDef="let row" style="text-align: left;">{{ row.description }}</td>
+        </ng-container>  
+
+        <ng-container [matColumnDef]="'col4'">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="true" style="text-align: left;">{{ "Visibility" | i18next }}</th>
+            <td mat-cell *matCellDef="let row" style="text-align: left;">{{ row.visibility }}</td>
+          </ng-container>
+  
+        <ng-container [matColumnDef]="'col5'">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="true" style="text-align: left;">{{ "E-mail" | i18next }}</th>
+          <td mat-cell *matCellDef="let row" style="text-align: left;">{{ row.mail }}</td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="['index', 'col1', 'col2', 'col3', 'col4', 'col5']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['index', 'col1', 'col2', 'col3', 'col4', 'col5']"></tr>
+      </mat-table>
+</mat-card>
+
+<br/>
+
+<mat-card *ngIf="appRoleAssignments$ | async; let appRoleAssignments">
+    <mat-card-header><mat-card-title>Role Assignments</mat-card-title></mat-card-header>
+    <mat-table #table [dataSource]="appRoleAssignments" class="data-table" matSort (matSortChange)="onSorting($event)" *ngIf="appRoleAssignments.length > 0">
+        <ng-container [matColumnDef]="'index'">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="true" style="text-align: left;">{{ "Index" | i18next }}</th>
+          <td mat-cell *matCellDef="let row; let i = index" style="text-align: left;">{{ i }}</td>
+        </ng-container>
+    
+        <ng-container [matColumnDef]="'col1'">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="true" style="text-align: left;">{{ "Id" | i18next }}</th>
+          <td mat-cell *matCellDef="let row" style="text-align: left;">{{ row.id }}</td>
+        </ng-container>
+    
+        <ng-container [matColumnDef]="'col2'">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="true" style="text-align: left;">{{ "Resource Name" | i18next }}</th>
+          <td mat-cell *matCellDef="let row" style="text-align: left;">{{ row.resourceDisplayName }}</td>
+        </ng-container>
+    
+        <ng-container [matColumnDef]="'col3'">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="true" style="text-align: left;">{{ "Created On" | i18next }}</th>
+          <td mat-cell *matCellDef="let row" style="text-align: left;">{{ row.createdDateTime | date}}</td>
+        </ng-container>     
+        <tr mat-header-row *matHeaderRowDef="['index', 'col1', 'col2', 'col3']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['index', 'col1', 'col2', 'col3']"></tr>
+      </mat-table>
+</mat-card>
+
+<br/>
+
+<mat-card *ngIf="calendars$ | async; let calendars">
+    <mat-card-header><mat-card-title>Calendar</mat-card-title></mat-card-header>
+    <mat-table #table [dataSource]="calendars" class="data-table" matSort (matSortChange)="onSorting($event)" *ngIf="calendars.length > 0">
+        <ng-container [matColumnDef]="'index'">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="true" style="text-align: left;">{{ "Index" | i18next }}</th>
+          <td mat-cell *matCellDef="let row; let i = index" style="text-align: left;">{{ i }}</td>
+        </ng-container>
+    
+        <ng-container [matColumnDef]="'col1'">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="true" style="text-align: left;">{{ "Name" | i18next }}</th>
+          <td mat-cell *matCellDef="let row" style="text-align: left;">{{ row.name }}</td>
+        </ng-container>
+    
+        <ng-container [matColumnDef]="'col2'">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="true" style="text-align: left;">{{ "Default Calendar" | i18next }}</th>
+          <td mat-cell *matCellDef="let row" style="text-align: left;">{{ row.isDefaultCalendar }}</td>
+        </ng-container>
+    
+        <ng-container [matColumnDef]="'col3'">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="true" style="text-align: left;">{{ "Owner" | i18next }}</th>
+          <td mat-cell *matCellDef="let row" style="text-align: left;">{{ row.owner?.address }}</td>
+        </ng-container>     
+        <tr mat-header-row *matHeaderRowDef="['index', 'col1', 'col2', 'col3']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['index', 'col1', 'col2', 'col3']"></tr>
+      </mat-table>
+</mat-card>
+
+<br/>
+
+<mat-card *ngIf="events$ | async; let events">
+    <mat-card-header><mat-card-title>Events</mat-card-title></mat-card-header>
+    <mat-table #table [dataSource]="events" class="data-table" matSort (matSortChange)="onSorting($event)" *ngIf="events.length > 0">
+        <ng-container [matColumnDef]="'index'">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="true" style="text-align: left;">{{ "Index" | i18next }}</th>
+          <td mat-cell *matCellDef="let row; let i = index" style="text-align: left;">{{ i }}</td>
+        </ng-container>
+    
+        <ng-container [matColumnDef]="'col1'">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="true" style="text-align: left;">{{ "Subject" | i18next }}</th>
+          <td mat-cell *matCellDef="let row" style="text-align: left;">{{ row.subject }}</td>
+        </ng-container>
+    
+        <ng-container [matColumnDef]="'col2'">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="true" style="text-align: left;">{{ "Created On" | i18next }}</th>
+          <td mat-cell *matCellDef="let row" style="text-align: left;">{{ row.createdDateTime | date:'short' }}</td>
+        </ng-container>
+    
+        <ng-container [matColumnDef]="'col3'">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="true" style="text-align: left;">{{ "Last Modified On" | i18next }}</th>
+          <td mat-cell *matCellDef="let row" style="text-align: left;">{{ row.lastModifiedDateTime | date:'short' }}</td>
+        </ng-container>
+        
+        <ng-container [matColumnDef]="'col4'">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="true" style="text-align: left;">{{ "Start" | i18next }}</th>
+            <td mat-cell *matCellDef="let row" style="text-align: left;">{{ row.start?.dateTime | date:'short' }}</td>
+        </ng-container>
+
+        <ng-container [matColumnDef]="'col5'">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="true" style="text-align: left;">{{ "End" | i18next }}</th>
+            <td mat-cell *matCellDef="let row" style="text-align: left;">{{ row.end?.dateTime | date:'short' }}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="['index', 'col1', 'col2', 'col3', 'col4', 'col5']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['index', 'col1', 'col2', 'col3', 'col4', 'col5'  ]"></tr>
+      </mat-table>
+</mat-card>
